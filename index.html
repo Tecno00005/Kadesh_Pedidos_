@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pedidos em atraso · Kadesh</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body class="bloqueado">
+<!-- login: a mesma tela da Consulta de Pedidos (nº + usuário e a senha do DX). Os dados são
+     publicados cifrados; só abrem com a senha de quem tem acesso liberado na Consulta. -->
+<div id="login" class="tela-login">
+  <form id="loginForm" class="login-cartao" novalidate autocomplete="off" aria-labelledby="loginTitulo">
+    <div class="login-faixa" aria-hidden="true"></div>
+    <div class="login-corpo">
+      <div class="login-marca">
+        <img src="logo-kadesh.png" alt="Kadesh">
+        <span id="loginTitulo">Pedidos em atraso</span>
+      </div>
+      <label class="login-rotulo" for="loginNumero">Login</label>
+      <div class="login-linha">
+        <input id="loginNumero" class="login-campo login-num" inputmode="numeric" placeholder="Nº"
+               aria-label="Número do usuário" maxlength="5" autocomplete="off">
+        <div class="login-combo">
+          <input id="loginUsuario" class="login-campo" placeholder="Usuário" aria-label="Usuário"
+                 role="combobox" aria-expanded="false" aria-controls="loginLista" aria-autocomplete="list"
+                 autocomplete="off">
+          <ul id="loginLista" class="login-lista hidden" role="listbox" aria-label="Usuários"></ul>
+        </div>
+      </div>
+      <label class="login-rotulo" for="loginSenha">Senha</label>
+      <div class="login-senha">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <input id="loginSenha" class="login-campo" type="password" autocomplete="current-password" aria-label="Senha">
+        <button type="button" id="loginVerSenha" class="login-olho" aria-label="Mostrar senha" title="Mostrar/ocultar a senha">
+          <svg class="olho-aberto" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/></svg>
+          <svg class="olho-fechado" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6A17.4 17.4 0 0 0 2 12s3.5 7 10 7a9.9 9.9 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+        </button>
+      </div>
+      <p id="loginErro" class="login-aviso hidden" data-tipo="erro" role="alert"></p>
+      <button type="submit" id="loginEntrar" class="login-botao">Acessar</button>
+    </div>
+  </form>
+  <p class="login-rodape">Use o mesmo usuário e senha do sistema DX. Sem acesso? Fale com o PCP.</p>
+</div>
+
+<header class="topo">
+  <img src="logo-kadesh.png" alt="Kadesh" class="logo">
+  <div class="titulo">
+    <h1>Pedidos em atraso</h1>
+    <p id="sub">carregando…</p>
+  </div>
+  <button id="btnImprimir" class="btn" type="button" title="Imprimir ou salvar em PDF">Imprimir</button>
+  <button id="btnSair" class="btn btn-leve" type="button" title="Sair">Sair</button>
+</header>
+<div id="velho" class="aviso hidden"></div>
+
+<main>
+  <section id="resumo" class="resumo" aria-label="Resumo por faixa de atraso"></section>
+
+  <section class="filtros" aria-label="Filtros">
+    <input id="fBusca" type="search" placeholder="Buscar pedido, cliente ou motivo…" autocomplete="off">
+    <select id="fTipo"><option value="">Pedidos e amostras</option><option value="PEDIDO">Só pedidos</option><option value="AMOSTRA">Só amostras</option></select>
+    <select id="fStatus"><option value="">Status: todos</option></select>
+    <select id="fSetor"><option value="">Setor: todos</option></select>
+    <button id="fLimpar" class="btn btn-leve" type="button">Limpar</button>
+  </section>
+  <p id="contagem" class="contagem"></p>
+
+  <section id="lista" class="lista" aria-live="polite"></section>
+  <p id="vazio" class="vazio hidden">Nenhum pedido em atraso com esses filtros.</p>
+</main>
+
+<footer class="rodape">
+  <p id="regra"></p>
+  <p>Fonte: Consulta de Pedidos do PCP · atualizado automaticamente.</p>
+</footer>
+<script src="app.js?v=8"></script>
+</body>
+</html>
